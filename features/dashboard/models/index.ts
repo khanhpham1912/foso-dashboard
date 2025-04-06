@@ -34,3 +34,16 @@ export interface Material {
   unit: string;
   quantity: number;
 }
+
+export interface ProductionStatus {
+    incomplete?: number;
+    inProgress?: number;
+    completed?: number;
+  }
+  
+export  interface SummaryData {
+    name: string;
+    value: number;
+    color: string;
+  }
+  

@@ -4,6 +4,7 @@ import {
   TopCustomerStats,
   ProgressItemStats,
   Material,
+  ProductionStatus,
 } from "@/features/dashboard/models";
 
 export const mockProductStats: ProductStats[] = [
@@ -148,5 +149,13 @@ export const mockMaterials: Material[] = [
     code: "NVL_000024",
     unit: "Mét",
     quantity: 8,
+  },
+];
+
+export const mockProductionStatuses: ProductionStatus[] = [
+  {
+    incomplete: 5,
+    inProgress: 6,
+    completed: 5,
   },
 ];
