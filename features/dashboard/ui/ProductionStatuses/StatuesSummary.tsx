@@ -19,6 +19,24 @@ const StatusSummary = ({
   );
 };
 
+const skeletonData = [
+    {
+        name: "Chưa hoàn thành",
+        value: 0,
+        color: "#FF8F0D",
+      },
+      {
+        name: "Đang sản xuất",
+        value: 0,
+        color: "var(--new-blue-500)",
+      },
+      {
+        name: "Hoàn thành",
+        value: 0,
+        color: "#1FC583",
+      },
+];
+
 export const StatuesSummary = ({
   summaryData,
   isLoading,
@@ -28,10 +46,10 @@ export const StatuesSummary = ({
 }) => {
   return (
     <div className="flex gap-2 w-full">
-      {summaryData.map((status) => (
+      {isLoading ? skeletonData.map((status) => <StatusSummary key={status.name} quantity={status.value} status={status.name} color={status.color}/>): summaryData.map((status) => (
         <StatusSummary
           key={status.name}
-          quantity={isLoading ? 0 : status.value}
+          quantity={status.value}
           status={status.name}
           color={status.color}
         />
