@@ -20,20 +20,29 @@ import {
 } from "@/components/ui/select";
 
 const skeletonData = [
-  { name: "", expectedQuantity: 0, actualQuantity: 0 },
-  { name: "", expectedQuantity: 0, actualQuantity: 0 },
-  { name: "", expectedQuantity: 0, actualQuantity: 0 },
-  { name: "", expectedQuantity: 0, actualQuantity: 0 },
-  { name: "", expectedQuantity: 0, actualQuantity: 0 },
+  { name: "-", expectedQuantity: 0, actualQuantity: 0 },
+  { name: "-", expectedQuantity: 0, actualQuantity: 0 },
+  { name: "-", expectedQuantity: 0, actualQuantity: 0 },
+  { name: "-", expectedQuantity: 0, actualQuantity: 0 },
+  { name: "-", expectedQuantity: 0, actualQuantity: 0 },
+  { name: "-", expectedQuantity: 0, actualQuantity: 0 },
 ];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-lg bg-[#171719] p-3 text-white shadow-lg">
-        <p className="font-medium">{label}</p>
-        <p className="text-[#03A0F4]">Kế hoạch: {payload[0].value}</p>
-        <p className="text-[#1FC5A1]">Thực hiện: {payload[1].value}</p>
+      <div className="flex flex-col bg-white rounded-lg gap-2 p-3 shadow-lg">
+        <p className="font-medium text-foreground">{label}</p>
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-2 rounded-xl bg-new-blue-500" />
+          <span className="text-neutral-700">Kế hoạch: {payload[0].value}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-2 rounded-xl bg-[#1FC5A1]" />
+          <span className="text-neutral-700">
+            Thực hiện: {payload[1].value}
+          </span>
+        </div>
       </div>
     );
   }
@@ -42,8 +51,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const ProductionPlan = ({
   data = [],
+  isLoading = false,
 }: {
   data: ProductionPlanStats[];
+  isLoading?: boolean;
 }) => {
   return (
     <Card className="w-full border-none">
@@ -69,16 +80,23 @@ export const ProductionPlan = ({
         <div className="h-[20rem] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={data || skeletonData}
+              data={isLoading ? skeletonData : data}
               margin={{
                 right: 16,
                 left: 12,
               }}
+              maxBarSize={32}
             >
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
               <XAxis
                 dataKey="productName"
-                label={{ value: "Mặt hàng", position: "left", offset: 8 }}
+                label={{
+                  value: "Mặt hàng",
+                  position: "left",
+                  offset: 8,
+                  fontSize: 12,
+                  dy: 2,
+                }}
                 axisLine={false}
                 height={50}
                 tickLine={false}
@@ -91,6 +109,7 @@ export const ProductionPlan = ({
                         dy={24}
                         fill="#929AA5"
                         textAnchor="middle"
+                        fontSize={12}
                       >
                         {props.payload.value}
                       </text>
@@ -106,23 +125,17 @@ export const ProductionPlan = ({
                   value: data ? "Cái" : "Đơn vị",
                   position: "top",
                   offset: 20,
+                  fontSize: 12,
                 }}
                 tickLine={false}
-                tick={{ fill: "#929AA5" }}
+                tick={{ fill: "#929AA5", fontSize: 12 }}
               />
-              <Tooltip content={<CustomTooltip />} />
-              <Tooltip
-                formatter={(value: number) => `${value} cái`}
-                cursor={{ fill: "rgba(0, 0, 0, 0.05)" }}
-                contentStyle={{
-                  backgroundColor: "#111827",
-                  color: "#fff",
-                  borderRadius: 6,
-                  fontSize: 14,
-                  padding: 8,
-                }}
-                labelStyle={{ display: "none" }}
-              />
+              {!!data.length && (
+                <Tooltip
+                  content={<CustomTooltip />}
+                  cursor={{ fill: "none" }}
+                />
+              )}
               <Legend
                 verticalAlign="top"
                 content={(props) => (
@@ -148,13 +161,13 @@ export const ProductionPlan = ({
                 dataKey="expectedQuantity"
                 name="Kế hoạch"
                 fill={"var(--new-blue-500)"}
-                radius={[4, 4, 0, 0]}
+                radius={4}
               />
               <Bar
                 dataKey="actualQuantity"
                 name="Thực hiện"
                 fill={"#1FC583"}
-                radius={[4, 4, 0, 0]}
+                radius={4}
               />
             </BarChart>
           </ResponsiveContainer>

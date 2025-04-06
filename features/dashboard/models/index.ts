@@ -11,3 +11,9 @@ export interface ProductionPlanStats {
   expectedQuantity: number;
   actualQuantity: number;
 }
+
+export interface TopCustomerStats {
+  id: string;
+  name: string;
+  quantity: number;
+}

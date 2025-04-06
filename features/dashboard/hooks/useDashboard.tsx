@@ -1,4 +1,4 @@
-import { ProductStats, ProductionPlanStats } from "../models";
+import { ProductStats, ProductionPlanStats, TopCustomerStats } from "../models";
 import { useEffect, useState } from "react";
 
 const mockProductStats: ProductStats[] = [
@@ -67,9 +67,18 @@ const mockProductionPlan: ProductionPlanStats[] = [
   },
 ];
 
+const mockTopCustomerStats: TopCustomerStats[] = [
+  { id: "1", name: "Shop thời trang công sở Basic Office", quantity: 3000 },
+  { id: "2", name: "Shop quần áo streetwear New York", quantity: 2900 },
+  { id: "3", name: "Outlet Lemon squeeze", quantity: 2800 },
+  { id: "4", name: "Công ty May mặc Saigon trendy", quantity: 2700 },
+  { id: "5", name: "Công ty Dệt may Happy Polla", quantity: 2600 },
+];
+
 export const useDashboard = () => {
   const [productStats, setProductStats] = useState<ProductStats[]>([]);
   const [plan, setPlan] = useState<ProductionPlanStats[]>([]);
+  const [topCustomer, setTopCustomer] = useState<TopCustomerStats[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -79,6 +88,7 @@ export const useDashboard = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setProductStats(mockProductStats);
       setPlan(mockProductionPlan);
+      setTopCustomer(mockTopCustomerStats);
       setIsLoading(false);
     };
 
@@ -87,7 +97,8 @@ export const useDashboard = () => {
 
   return {
     productStats,
+    plan,
+    topCustomer,
     isLoading,
-    plan
   };
 };

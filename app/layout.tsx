@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lexendDeca.variable}`}>
+      <body className={`${lexendDeca.variable}`} suppressHydrationWarning>
         <StackedLayout>{children}</StackedLayout>
       </body>
     </html>
