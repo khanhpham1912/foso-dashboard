@@ -19,7 +19,7 @@ export default function Home() {
         <ProductionPlan data={plan} />
         <TopCustomer data={[]} />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-6">
         <ProductionStatuses />
         <ProductionProgress />
         <MaterialsNeeded />

@@ -1,8 +1,11 @@
-
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface ProgressItem {
   label: string;
@@ -24,12 +27,18 @@ export function ProductionProgress() {
   return (
     <Card className="w-full border-none">
       <CardHeader className="flex flex-row items-center justify-between">
-      <CardTitle>
-              Tiến độ sản xuất theo nhóm
-            </CardTitle>
-        <Button variant="outline" className="gap-2">
-          Filter <ChevronDown className="h-4 w-4" />
-        </Button>
+        <CardTitle>Tiến độ sản xuất theo nhóm</CardTitle>
+        <Select defaultValue="1">
+          <SelectTrigger className="w-36 gap-2 bg-transparent">
+            <SelectValue placeholder="Chọn trạng thái" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="1">Hoàn thành</SelectItem>
+            <SelectItem value="2">Đang xử lý</SelectItem>
+            <SelectItem value="3">Chưa hoàn thành</SelectItem>
+            <SelectItem value="4">Trễ</SelectItem>
+          </SelectContent>
+        </Select>
       </CardHeader>
       <CardContent className="space-y-8">
         {progressItems.map((item, index) => (
@@ -42,7 +51,9 @@ export function ProductionProgress() {
                 <span className="text-sm font-medium text-gray-900">
                   {item.value}
                 </span>
-                <span className="text-sm text-gray-500">({item.percentage}%)</span>
+                <span className="text-sm text-gray-500">
+                  ({item.percentage}%)
+                </span>
               </div>
             </div>
             <div className="h-2 w-full rounded-full bg-gray-100">
@@ -56,4 +67,4 @@ export function ProductionProgress() {
       </CardContent>
     </Card>
   );
-} 
+}

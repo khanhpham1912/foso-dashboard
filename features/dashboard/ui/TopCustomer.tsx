@@ -1,5 +1,4 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
 import {
   BarChart,
@@ -10,6 +9,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface TopCustomerChartProps {
   data: {
@@ -22,13 +28,22 @@ export function TopCustomer({ data = [] }: TopCustomerChartProps) {
   return (
     <Card className="w-full border-none">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle>
-          Top 5 khách hàng có sản lượng nhiều nhất
-        </CardTitle>
-        <Button variant="outline" size="sm" className="h-8">
-          <Calendar className="mr-2 h-4 w-4" />
-          <span>Tháng này</span>
-        </Button>
+        <CardTitle>Top 5 khách hàng có sản lượng nhiều nhất</CardTitle>
+        <Select defaultValue="1">
+          <SelectTrigger className="w-36 gap-2 bg-transparent">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-neutral-400" />
+              <SelectValue placeholder="Chọn quý" />
+            </div>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="1">Quý này</SelectItem>
+            <SelectItem value="2">Quý này</SelectItem>
+            <SelectItem value="3">Quý này</SelectItem>
+            <SelectItem value="4">Quý này</SelectItem>
+            <SelectItem value="5">Quý này</SelectItem>
+          </SelectContent>
+        </Select>
       </CardHeader>
       <div className="p-6 pt-0">
         <div className="h-[300px]">
@@ -68,11 +83,7 @@ export function TopCustomer({ data = [] }: TopCustomerChartProps) {
                 }}
                 cursor={{ fill: "rgba(0, 0, 0, 0.1)" }}
               />
-              <Bar
-                dataKey="value"
-                fill="#03A9F4"
-                radius={[4, 4, 0, 0]}
-              />
+              <Bar dataKey="value" fill="#03A9F4" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
