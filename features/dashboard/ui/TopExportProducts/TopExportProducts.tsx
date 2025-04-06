@@ -1,5 +1,4 @@
-import { Show } from "@/components/ui/show";
-import { ProductStats } from "../models";
+import { ProductStats } from "../../models";
 import { IncreaseIcon } from "@/icons/IncreaseIcon";
 import { DecreaseIcon } from "@/icons/DecreaseIcon";
 import { Card, CardContent } from "@/components/ui/card";
@@ -38,9 +37,7 @@ const ProductStatsCardSkeleton = () => {
       <CardContent className="p-6">
         <div className="flex items-start h-full">
           <div className="flex flex-col gap-3 justify-between h-full">
-            <span className="text-3xl font-bold text-new-blue-500">
-              0
-            </span>
+            <span className="text-3xl font-bold text-new-blue-500">0</span>
             <div className="flex flex-col justify-center">
               <span>Chưa có mặt hàng</span>
             </div>
@@ -64,16 +61,13 @@ export const TopExportProducts = ({
         Top sản phẩm sản xuất nhiều nhất
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
-
-      {isLoading ? (
-          Array(5).fill(null).map((_, index) => (
-            <ProductStatsCardSkeleton key={index} />
-          ))
-        ) : (
-            products.map((product) => (
-            <ProductStatsCard key={product.id} product={product} />
-          ))
-        )}
+        {isLoading
+          ? Array(5)
+              .fill(null)
+              .map((_, index) => <ProductStatsCardSkeleton key={index} />)
+          : products.map((product) => (
+              <ProductStatsCard key={product.id} product={product} />
+            ))}
       </div>
     </div>
   );

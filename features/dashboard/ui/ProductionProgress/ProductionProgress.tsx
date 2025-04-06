@@ -1,15 +1,9 @@
 // components
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 // models
-import { ProgressItemStats } from "../models";
+import { ProgressItemStats } from "../../models";
+import { StatusSelect } from "./StatusSelect";
 
 const ProgressItem = ({
   label,
@@ -63,17 +57,14 @@ export const ProductionProgress = ({
     <Card className="w-full border-none">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>Tiến độ sản xuất theo nhóm</CardTitle>
-        <Select defaultValue="1">
-          <SelectTrigger className="w-36 gap-2 bg-transparent">
-            <SelectValue placeholder="Chọn trạng thái" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1">Hoàn thành</SelectItem>
-            <SelectItem value="2">Đang xử lý</SelectItem>
-            <SelectItem value="3">Chưa hoàn thành</SelectItem>
-            <SelectItem value="4">Trễ</SelectItem>
-          </SelectContent>
-        </Select>
+        <StatusSelect
+          options={[
+            { label: "Hoàn thành", value: "1" },
+            { label: "Đang xử lý", value: "2" },
+            { label: "Chưa hoàn thành", value: "3" },
+            { label: "Trễ", value: "4" },
+          ]}
+        />
       </CardHeader>
       <CardContent className="space-y-8">
         {isLoading

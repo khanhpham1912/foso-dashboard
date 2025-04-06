@@ -10,7 +10,7 @@ import {
 
 // models
 import {
-    Material,
+  Material,
   ProductStats,
   ProductionPlanStats,
   ProductionStatus,
@@ -23,22 +23,22 @@ import {
 import { useEffect, useState } from "react";
 
 const getSummaryData = (status: ProductionStatus): SummaryData[] => [
-    {
-      name: "Chưa hoàn thành",
-      value: status.incomplete || 0,
-      color: "#FF8F0D",
-    },
-    {
-      name: "Đang sản xuất",
-      value: status.inProgress || 0,
-      color: "var(--new-blue-500)",
-    },
-    {
-      name: "Hoàn thành",
-      value: status.completed || 0,
-      color: "#1FC583",
-    },
-  ];
+  {
+    name: "Chưa hoàn thành",
+    value: status.incomplete || 0,
+    color: "#FF8F0D",
+  },
+  {
+    name: "Đang sản xuất",
+    value: status.inProgress || 0,
+    color: "var(--new-blue-500)",
+  },
+  {
+    name: "Hoàn thành",
+    value: status.completed || 0,
+    color: "#1FC583",
+  },
+];
 
 export const useDashboard = () => {
   // All fetching logic is simulated with mock data
@@ -50,16 +50,17 @@ export const useDashboard = () => {
   const [topCustomer, setTopCustomer] = useState<TopCustomerStats[]>([]);
   const [progressItems, setProgressItems] = useState<ProgressItemStats[]>([]);
   const [materials, setMaterials] = useState<Material[]>([]);
-  const [productionStatuses, setProductionStatuses] = useState<ProductionStatus[]>([]);
+  const [productionStatuses, setProductionStatuses] = useState<
+    ProductionStatus[]
+  >([]);
   const [summaryData, setSummaryData] = useState<SummaryData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      // Simulate API call with 1000ms delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Simulate API call with 2000ms delay
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setProductStats(mockProductStats);
       setPlan(mockProductionPlan);
