@@ -18,13 +18,13 @@ interface MenuProps {
 
 export const Menu = ({ items }: MenuProps) => {
   return (
-    <NavigationMenu>
-      <NavigationMenuList className="gap-3">
+    <NavigationMenu className="hidden sm:block">
+      <NavigationMenuList className="gap-1 sm:gap-2 lg:gap-3">
         {items.map((item) => (
           <NavigationMenuItem key={item.href}>
             <Link href={item.href} legacyBehavior passHref>
               <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} text-white/90`}
+                className={`${navigationMenuTriggerStyle()} text-white/90 text-xs sm:text-sm px-2 lg:px-3 py-1 lg:py-2`}
               >
                 {item.name}
               </NavigationMenuLink>
