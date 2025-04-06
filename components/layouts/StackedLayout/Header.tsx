@@ -20,7 +20,7 @@ const menuItems = [
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-50 h-[4.5rem] w-full bg-[#003FA0] flex items-center justify-between px-12">
+    <header className="sticky top-0 z-50 h-[4.5rem] w-full bg-new-blue-700 flex items-center justify-between px-12">
       <div className="flex items-center gap-6">
         <div className="w-[83] h-8 relative">
           <Image
