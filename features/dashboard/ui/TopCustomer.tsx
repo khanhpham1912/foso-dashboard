@@ -37,13 +37,13 @@ const CustomTooltip = ({ active, payload }: any) => {
   return null;
 };
 
-export function TopCustomer({
+export const TopCustomer = ({
   data = [],
   isLoading = false,
 }: {
   data: TopCustomerStats[];
   isLoading?: boolean;
-}) {
+}) => {
   return (
     <Card className="w-full border-none">
       <CardHeader className="flex flex-row items-center justify-between">

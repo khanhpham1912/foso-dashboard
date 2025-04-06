@@ -36,7 +36,7 @@ const productionStatuses: ProductionStatus[] = [
   },
 ];
 
-export function ProductionStatuses() {
+export const ProductionStatuses = () => {
   return (
     <Card className="w-full border-none">
       <CardHeader>

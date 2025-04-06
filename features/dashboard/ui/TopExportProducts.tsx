@@ -53,33 +53,27 @@ const ProductStatsCardSkeleton = () => {
 
 export const TopExportProducts = ({
   products,
+  isLoading,
 }: {
   products: ProductStats[];
+  isLoading: boolean;
 }) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="font-medium text-base sm:text-lg">
+      <div className="font-medium text-lg">
         Top sản phẩm sản xuất nhiều nhất
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
-        <Show
-          when={!!products.length}
-          fallback={
-            <>
-              <ProductStatsCardSkeleton />
-              <ProductStatsCardSkeleton />
-              <ProductStatsCardSkeleton />
-              <ProductStatsCardSkeleton />
-              <ProductStatsCardSkeleton />
-            </>
-          }
-        >
-          <>
-            {products.map((product) => (
-              <ProductStatsCard key={product.id} product={product} />
-            ))}
-          </>
-        </Show>
+
+      {isLoading ? (
+          Array(5).fill(null).map((_, index) => (
+            <ProductStatsCardSkeleton key={index} />
+          ))
+        ) : (
+            products.map((product) => (
+            <ProductStatsCard key={product.id} product={product} />
+          ))
+        )}
       </div>
     </div>
   );

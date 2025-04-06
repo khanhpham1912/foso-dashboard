@@ -64,7 +64,7 @@ const materials: Material[] = [
   },
 ];
 
-export function MaterialsNeeded() {
+export const MaterialsNeeded = () => {
   return (
     <Card className="w-full border-none">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">

@@ -6,24 +6,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ProgressItemStats } from "../models";
 
-interface ProgressItem {
-  label: string;
-  value: number;
-  percentage: number;
-}
+const ProgressItem = ({ label, value, percentage }: ProgressItemStats) => {
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className="text-sm font-medium text-gray-900">
+          {label}
+        </span>
+        <div className="flex items-center gap-1">
+          <span className="text-sm font-medium text-gray-900">
+            {value}
+          </span>
+          <span className="text-sm text-gray-500">
+            ({percentage}%)
+          </span>
+        </div>
+      </div>
+      <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
+        <div
+          className="h-2 rounded-full bg-[#1FC583] animate-progress"
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
+    </div>
+  );
+};
 
-const progressItems: ProgressItem[] = [
-  { label: "TotalProfit", value: 46, percentage: 60 },
-  { label: "TotalIncome", value: 46, percentage: 23 },
-  { label: "TotalExpenses", value: 46, percentage: 12 },
-  { label: "TotalExpenses", value: 50, percentage: 12 },
-  { label: "TotalExpenses", value: 49, percentage: 12 },
-  { label: "TotalExpenses", value: 49, percentage: 12 },
-  { label: "TotalExpenses", value: 50, percentage: 12 },
-];
+const ProgressItemSkeleton = () => {
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className="text-sm font-medium text-gray-900">
+         Chưa có mặt hàng
+        </span>
+        <span>-</span>
+      </div>
+      <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden"/>
+    </div>
+  );
+};
 
-export function ProductionProgress() {
+export const ProductionProgress = ({data, isLoading}: {data: ProgressItemStats[], isLoading: boolean}) => {
   return (
     <Card className="w-full border-none">
       <CardHeader className="flex flex-row items-center justify-between">
@@ -41,29 +66,15 @@ export function ProductionProgress() {
         </Select>
       </CardHeader>
       <CardContent className="space-y-8">
-        {progressItems.map((item, index) => (
-          <div key={index} className="space-y-2">
-            <div className="flex justify-between">
-              <span className="text-sm font-medium text-gray-900">
-                {item.label}
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="text-sm font-medium text-gray-900">
-                  {item.value}
-                </span>
-                <span className="text-sm text-gray-500">
-                  ({item.percentage}%)
-                </span>
-              </div>
-            </div>
-            <div className="h-2 w-full rounded-full bg-gray-100">
-              <div
-                className="h-2 rounded-full bg-green-500"
-                style={{ width: `${item.percentage}%` }}
-              />
-            </div>
-          </div>
-        ))}
+        {isLoading ? (
+          Array(7).fill(null).map((_, index) => (
+            <ProgressItemSkeleton key={index} />
+          ))
+        ) : (
+          data.map((item) => (
+            <ProgressItem key={item.id} {...item} />
+          ))
+        )}
       </CardContent>
     </Card>
   );

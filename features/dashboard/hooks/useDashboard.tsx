@@ -1,4 +1,4 @@
-import { ProductStats, ProductionPlanStats, TopCustomerStats } from "../models";
+import { ProductStats, ProductionPlanStats, ProgressItemStats, TopCustomerStats } from "../models";
 import { useEffect, useState } from "react";
 
 const mockProductStats: ProductStats[] = [
@@ -75,10 +75,22 @@ const mockTopCustomerStats: TopCustomerStats[] = [
   { id: "5", name: "Công ty Dệt may Happy Polla", quantity: 2600 },
 ];
 
+
+const mockProgressItems: ProgressItemStats[] = [
+    { id: "1", label: "TotalProfit", value: "46", percentage: 60 },
+    { id: "2", label: "TotalIncome", value: "46", percentage: 23 },
+    { id: "3", label: "TotalExpenses", value: "46", percentage: 12 },
+    { id: "4", label: "TotalExpenses", value: "50", percentage: 12 },
+    { id: "5", label: "TotalExpenses", value: "49", percentage: 12 },
+    { id: "6", label: "TotalExpenses", value: "49", percentage: 12 },
+    { id: "7", label: "TotalExpenses", value: "50", percentage: 12 },
+  ];
+
 export const useDashboard = () => {
   const [productStats, setProductStats] = useState<ProductStats[]>([]);
   const [plan, setPlan] = useState<ProductionPlanStats[]>([]);
   const [topCustomer, setTopCustomer] = useState<TopCustomerStats[]>([]);
+  const [progressItems, setProgressItems] = useState<ProgressItemStats[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -89,6 +101,7 @@ export const useDashboard = () => {
       setProductStats(mockProductStats);
       setPlan(mockProductionPlan);
       setTopCustomer(mockTopCustomerStats);
+      setProgressItems(mockProgressItems);
       setIsLoading(false);
     };
 
@@ -99,6 +112,7 @@ export const useDashboard = () => {
     productStats,
     plan,
     topCustomer,
+    progressItems,
     isLoading,
   };
 };

@@ -17,3 +17,10 @@ export interface TopCustomerStats {
   name: string;
   quantity: number;
 }
+
+export interface ProgressItemStats {
+  id: string;
+  label: string;
+  value: string;
+  percentage: number;
+}

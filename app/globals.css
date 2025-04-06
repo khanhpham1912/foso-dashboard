@@ -3,6 +3,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+  .animate-progress {
+    animation: progress 1s ease-out forwards;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
