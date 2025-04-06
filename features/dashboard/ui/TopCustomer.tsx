@@ -1,5 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// icons
 import { Calendar } from "lucide-react";
+
+// components
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   BarChart,
   Bar,
@@ -16,6 +19,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+// models
 import { TopCustomerStats } from "../models";
 
 const skeletonData = [
@@ -145,11 +150,15 @@ export const TopCustomer = ({
                   cursor={{ fill: "none" }}
                 />
               )}
-              <Bar dataKey="quantity" fill="var(--new-blue-500)" radius={4} />
+              <Bar
+                dataKey="quantity"
+                fill="var(--new-blue-500)"
+                radius={[0, 4, 4, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
     </Card>
   );
-}
+};

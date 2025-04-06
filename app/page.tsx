@@ -10,7 +10,8 @@ import {
 } from "@/features/dashboard/ui";
 
 export default function Home() {
-  const { productStats, plan, topCustomer, isLoading, progressItems} = useDashboard();
+  const { productStats, plan, topCustomer, isLoading, progressItems, materials } =
+    useDashboard();
 
   return (
     <div className="flex flex-col gap-6 py-8">
@@ -22,7 +23,7 @@ export default function Home() {
       <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-6">
         <ProductionStatuses />
         <ProductionProgress data={progressItems} isLoading={isLoading} />
-        <MaterialsNeeded />
+        <MaterialsNeeded data={materials} isLoading={isLoading} />
       </div>
     </div>
   );

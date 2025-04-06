@@ -1,5 +1,8 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+// icons
 import { Calendar } from "lucide-react";
+
+// components
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
   BarChart,
   Bar,
@@ -10,7 +13,6 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { ProductionPlanStats } from "../models";
 import {
   Select,
   SelectContent,
@@ -18,6 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+// models
+import { ProductionPlanStats } from "../models";
 
 const skeletonData = [
   { name: "-", expectedQuantity: 0, actualQuantity: 0 },
@@ -161,13 +166,13 @@ export const ProductionPlan = ({
                 dataKey="expectedQuantity"
                 name="Kế hoạch"
                 fill={"var(--new-blue-500)"}
-                radius={4}
+                radius={[4, 4, 0, 0]}
               />
               <Bar
                 dataKey="actualQuantity"
                 name="Thực hiện"
                 fill={"#1FC583"}
-                radius={4}
+                radius={[4, 4, 0, 0]}
               />
             </BarChart>
           </ResponsiveContainer>

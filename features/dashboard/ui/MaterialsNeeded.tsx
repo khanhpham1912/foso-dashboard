@@ -1,5 +1,11 @@
 "use client";
 
+// icons
+import { Calendar } from "lucide-react";
+import Image from "next/image";
+import { TableEmptyIcon } from "@/icons/TableEmptyIcon";
+
+// components
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -9,7 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Calendar } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -18,63 +23,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface Material {
-  id: string;
-  name: string;
-  code: string;
-  unit: string;
-  quantity: number;
-}
+// models
+import { Material } from "../models";
 
-const materials: Material[] = [
-  {
-    id: "1",
-    name: "Chỉ cotton",
-    code: "NVL_000014",
-    unit: "Cuộn",
-    quantity: 8,
-  },
-  {
-    id: "2",
-    name: "Vải lụa",
-    code: "NVL_000024",
-    unit: "Mét",
-    quantity: 8,
-  },
-  {
-    id: "3",
-    name: "Vải lót",
-    code: "NVL_000024",
-    unit: "Mét",
-    quantity: 8,
-  },
-  {
-    id: "4",
-    name: "Vải chống thấm",
-    code: "NVL_000024",
-    unit: "Mét",
-    quantity: 8,
-  },
-  {
-    id: "5",
-    name: "Vải nỉ",
-    code: "NVL_000024",
-    unit: "Mét",
-    quantity: 8,
-  },
-];
-
-export const MaterialsNeeded = () => {
+export const MaterialsNeeded = ({
+  data,
+  isLoading,
+}: {
+  data: Material[];
+  isLoading?: boolean;
+}) => {
   return (
     <Card className="w-full border-none">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>Nguyên vật liệu cần mua</CardTitle>
-
         <Select defaultValue="1">
           <SelectTrigger className="w-36 gap-2 bg-transparent">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-neutral-400" />
-              <SelectValue placeholder="Chọn quý" />
+              <SelectValue placeholder="Chọn tuần" />
             </div>
           </SelectTrigger>
           <SelectContent>
@@ -90,37 +57,62 @@ export const MaterialsNeeded = () => {
         <Table>
           <TableHeader>
             <TableRow className="bg-gray-50">
-              <TableHead className="w-[50px]">STT</TableHead>
-              <TableHead>Nguyên vật liệu</TableHead>
-              <TableHead>Đơn vị tính</TableHead>
-              <TableHead className="text-right">Số lượng</TableHead>
+              <TableHead className="w-12 text-center">STT</TableHead>
+              <TableHead className="w-64">Nguyên vật liệu</TableHead>
+              <TableHead className="w-24">Đơn vị tính</TableHead>
+              <TableHead className="w-24 text-center">Số lượng</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {materials.map((material, index) => (
-              <TableRow key={material.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-gray-200 rounded"></div>
-                    <div>
-                      <div className="font-medium">{material.name}</div>
-                      <div className="text-sm text-gray-500">(none)</div>
-                      <div className="text-sm text-blue-500">
-                        {material.code}
-                      </div>
+            {isLoading || !data.length ? (
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={4} className="text-center">
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <TableEmptyIcon />
+                    <div className="mt-6 text-neutral-500 text-2xl font-medium">
+                      Chưa có dữ liệu
                     </div>
                   </div>
                 </TableCell>
-                <TableCell>{material.unit}</TableCell>
-                <TableCell className="text-right">
-                  {material.quantity}
-                </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              data.map((material, index) => (
+                <TableRow key={material.id}>
+                  <TableCell className="text-center">{index + 1}</TableCell>
+                  <TableCell>
+                    <div className="flex items-start gap-2">
+                      <div className="w-8 h-8 bg-[#D0D5DD] rounded flex items-center justify-center overflow-hidden">
+                        {material.image && (
+                          <Image
+                            src={material.image}
+                            alt={material.name}
+                            width={32}
+                            height={32}
+                            className="object-cover"
+                          />
+                        )}
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="font-semibold">{material.name}</div>
+                        <span className="text-tiny text-neutral-400">
+                          (none)
+                        </span>
+                        <span className="text-tiny text-[#3276FA]">
+                          {material.code}
+                        </span>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>{material.unit}</TableCell>
+                  <TableCell className="text-center">
+                    {material.quantity}
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </CardContent>
     </Card>
   );
-}
+};

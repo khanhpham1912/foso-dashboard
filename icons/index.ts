@@ -5,3 +5,4 @@ export * from "./MessageIcon";
 export * from "./BellIcon";
 export * from "./IncreaseIcon";
 export * from "./DecreaseIcon";
+export * from "./TableEmptyIcon";

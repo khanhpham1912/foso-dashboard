@@ -58,6 +58,8 @@
   --color-new-blue-700: var(--new-blue-700);
   --color-new-blue-500: var(--new-blue-500);
   --shadow-card: var(--shadow-card);
+  --text-tiny: 0.625rem; 
+  --text-tiny--line-height: 0.94rem; 
 }
 
 :root {

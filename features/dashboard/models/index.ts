@@ -22,5 +22,15 @@ export interface ProgressItemStats {
   id: string;
   label: string;
   value: string;
+  unit: string;
   percentage: number;
+}
+
+export interface Material {
+  id: string;
+  image: string;
+  name: string;
+  code: string;
+  unit: string;
+  quantity: number;
 }
