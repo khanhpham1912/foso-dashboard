@@ -15,29 +15,44 @@ interface ProductionStatus {
   name: string;
   value: number;
   color: string;
-  description: string;
 }
 
 const productionStatuses: ProductionStatus[] = [
   {
-    name: "Cow & Gate premium",
-    value: 30,
+    name: "Chưa hoàn thành",
+    value: 5,
     color: "#FF8F0D",
-    description: "Cow & Gate premium",
   },
   {
-    name: "Cow & Gate premium",
-    value: 40,
-    color: "#0375FF",
-    description: "Cow & Gate premium",
+    name: "Đang sản xuất",
+    value: 6,
+    color: "var(--new-blue-500)",
   },
   {
-    name: "Cow & Gate premium",
-    value: 30,
+    name: "Hoàn thành",
+    value: 5,
     color: "#1FC583",
-    description: "Cow & Gate premium",
   },
 ];
+
+const StatusSummary = ({
+  quantity,
+  status,
+  color,
+}: {
+  quantity: number;
+  status: string;
+  color: string;
+}) => {
+  return (
+    <div className="w-full rounded-lg border border-[#DDDDE2] flex flex-col p-2">
+      <div className="text-2xl font-semibold" style={{ color }}>
+        {quantity}
+      </div>
+      <div className="text-sm">{status}</div>
+    </div>
+  );
+};
 
 export const ProductionStatuses = () => {
   return (
@@ -63,7 +78,16 @@ export const ProductionStatuses = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <></>
+        <div className="flex gap-2">
+          {productionStatuses.map((status) => (
+            <StatusSummary
+              key={status.name}
+              quantity={status.value}
+              status={status.name}
+              color={status.color}
+            />
+          ))}
+        </div>
       </CardContent>
     </Card>
   );
