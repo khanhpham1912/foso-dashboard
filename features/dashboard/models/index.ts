@@ -4,3 +4,10 @@ export interface ProductStats {
   quantity: number;
   percentChange: number;
 }
+
+export interface ProductionPlanStats {
+  id: string;
+  productName: string;
+  expectedQuantity: number;
+  actualQuantity: number;
+}

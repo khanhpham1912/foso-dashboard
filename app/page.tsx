@@ -1,12 +1,29 @@
+"use client";
 import { useDashboard } from "@/features/dashboard/hooks";
-import { TopExportProducts } from "@/features/dashboard/ui";
+import {
+  MaterialsNeeded,
+  ProductionPlan,
+  ProductionProgress,
+  ProductionStatuses,
+  TopCustomer,
+  TopExportProducts,
+} from "@/features/dashboard/ui";
 
 export default function Home() {
-  const { productStats } = useDashboard();
+  const { productStats, plan } = useDashboard();
 
   return (
     <div className="flex flex-col gap-6 py-8">
       <TopExportProducts products={productStats} />
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <ProductionPlan data={plan} />
+        <TopCustomer data={[]} />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <ProductionStatuses />
+        <ProductionProgress />
+        <MaterialsNeeded />
+      </div>
     </div>
   );
 }
